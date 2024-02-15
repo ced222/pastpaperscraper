@@ -2,7 +2,7 @@ import requests
 import traceback
 import datetime
 import os
-from bs4 import BeautifulSoup
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -22,7 +22,7 @@ class webScraper:
             print("connection successful")
             self.driver = webdriver.Chrome(options=options) #initialize web driver object
             self.driver.get(url)
-            self.soup = BeautifulSoup(self.response.content, 'html.parser')
+           
             pass #whether request was successful
         else:
             print("failed to establish connection")
