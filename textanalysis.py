@@ -11,7 +11,7 @@ def openFile():
         file_path = '\\topics\\Computer Science\\ch{}comsci.txt'.format(str(i + 1))
 
         file_path = cwd + file_path
-        print(file_path)
+        # print(file_path)
         with open(file_path, 'r', encoding='utf-8') as file:
             file_contents = file.read()
             all_topic_texts.append([file_contents, "{}".format(str(i + 1))])

@@ -35,12 +35,11 @@ for i in range(pages):
 substring = r'\([a-h]\)'
 
 queations = []
-alphabet = 'abcdefgh'
 currentQueationNum = 0
 for page in pdfText:
     last_match = 0
     for match in re.finditer(substring, page):
-        if alphabet.index(match.group()[1]) == 0:
+        if match.group()[1] == 'a':
             currentQueationNum += 1
         queationText = markQuestion(match, match.start(), page, last_match)
         queations.append([str(currentQueationNum)+match.group()[1],queationText])
