@@ -31,7 +31,7 @@ for i,queation in queations:
         for chapter in chapterKw:
             for ckw,_ in chapter:
                 for kwi in kw.split():
-                    if kwi == ckw and len(ckw.split(' ')) != 1:
+                    if kwi in ckw and len(ckw.split(' ')) != 1:
                         current.append(chapterKw.index(chapter))
                         probs.append(__*_)
                         fkw.append([kw,ckw])
