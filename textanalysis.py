@@ -1,4 +1,4 @@
-import spacy
+import spacy, yake
 import os, json
 #cleans the inputted textbook data - tbh i have no idea how the code works i copy pasted it
 nlp = spacy.load("en_core_web_sm")
@@ -14,20 +14,20 @@ def openFile():
         print(file_path)
         with open(file_path, 'r', encoding='utf-8') as file:
             file_contents = file.read()
-            all_topic_texts.append([file_contents, "ch{}comsci".format(str(i + 1))])
+            all_topic_texts.append([file_contents, "{}".format(str(i + 1))])
     return all_topic_texts
 
 def cleanText(complete_text, textTopic): #function for effectively processing text
     complete_doc = nlp(complete_text)
-    print(complete_doc)
-    blacklist = {'processes','program','purpose','Describe','candidates', 'explain','including', 'show', 'understanding', 'use', 'justify', 'notes', 'guidance', 'terms'}
+    # print(complete_doc)
+    # blacklist = {'processes','program','purpose','Describe','candidates', 'explain','including', 'show', 'understanding', 'use', 'justify', 'notes', 'guidance', 'terms'}
     def is_token_allowed(token):
         return bool(
             token
             and str(token).strip()
             and not token.is_stop
             and not token.is_punct
-            and not token.text.lower() in blacklist
+            # and not token.text.lower() in blacklist
         )
 
     def preprocess_token(token):
@@ -49,7 +49,7 @@ complete_texts = openFile() #returns all 8 chapters of comsci AS
 complete_cleaned_texts = [] #texts after they have been cleaned
 for text in complete_texts:
     complete_cleaned_texts.append(cleanText(text[0], text[1]))
-print(complete_cleaned_texts)
+# print(complete_cleaned_texts)
 
 
 def checkSentenceMatch(sentence, topicText):
@@ -58,13 +58,22 @@ def checkSentenceMatch(sentence, topicText):
     for i in complete_sentence:
         totalScore += topicText.count(i)
     return totalScore
-
-#mainloop
-while True: 
-    sentence = input("Sentence to match: ")
+kw_extractor = yake.KeywordExtractor()
+language = "en"
+max_ngram_size = 3
+deduplication_threshold = 0.9
+numOfKeywords = 20
+custom_kw_extractor = yake.KeywordExtractor(lan=language, n=max_ngram_size, dedupLim=deduplication_threshold, top=numOfKeywords, features=None)
+def getTopic(queation):
+    sentence = queation[1]
     totalMatches = {}
+    keywords = custom_kw_extractor.extract_keywords(sentence)
+    sentence = ''
+    for i, j in keywords:
+        sentence += i + ' '
     for texts in complete_cleaned_texts:
         totalMatches[texts[1]] = checkSentenceMatch(sentence, texts[0])
 
     key_with_largest_value = max(totalMatches, key=totalMatches.get)
-    print("Most likely topic match: " + key_with_largest_value)
+    print("Queation " + queation[0], "Most likely topic match: chapter " + key_with_largest_value)
+#mainloop

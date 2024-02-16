@@ -1,5 +1,6 @@
   # importing required modules
 import PyPDF2, os, re
+from textanalysis import getTopic
 cwd = os.getcwd()
 filePath = cwd + '/past papers/computer Science - 9618/2023/9618_s23_qp_11.pdf'
 
@@ -18,11 +19,11 @@ def openPdf(pdfFile, page):
     pdfFileObj.close()
     return pageText, pages
  
-def markQuestion(match, index, pageText):
+def markQuestion(match, index, pageText, last_match):
     #slice the string to determine which half of the string (top/bottom) that the question detecter is supposed to iterate from
-    substring = r='\d '
-    first_match = re.search(substring, pageText)
-    print("Question" + str(first_match.group()), first_match.start())
+    substring = ' ['
+    first_match = pageText.find(substring, index)
+    return pageText[index:first_match].replace('.','')
         
 pdfText = []
 _, pages = openPdf(filePath, 0)
@@ -30,13 +31,19 @@ _, pages = openPdf(filePath, 0)
 for i in range(pages):
     pageText, _ = openPdf(filePath, i)
     pdfText.append(pageText)
-print(pdfText[3])
 
 substring = r'\([a-h]\)'
 
+queations = []
+alphabet = 'abcdefgh'
+currentQueationNum = 0
+for page in pdfText:
+    last_match = 0
+    for match in re.finditer(substring, page):
+        if alphabet.index(match.group()[1]) == 0:
+            currentQueationNum += 1
+        queationText = markQuestion(match, match.start(), page, last_match)
+        queations.append([str(currentQueationNum)+match.group()[1],queationText])
 
-
-for i in pdfText:
-    
-    for match in re.finditer(substring, i):
-        markQuestion(match, match.start(), i)
+for i in queations:
+    getTopic(i)
