@@ -30,7 +30,7 @@ def chapterKeywords():
     language = "en"
     numOfKeywords = 200
 
-    custom_kw_extractor = yake.KeywordExtractor(lan=language,top=numOfKeywords, features=None)
+    custom_kw_extractor = yake.KeywordExtractor(lan=language,top=numOfKeywords,n=2,features=None)
 
     chapterList = openFile()
     # print(len(chapterList))
