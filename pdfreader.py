@@ -1,6 +1,6 @@
   # importing required modules
 import PyPDF2, os, re
-# from textanalysis import getTopic
+#from textanalysis import getTopic
 
 
 def openPdf(pdfFile, page):
@@ -25,18 +25,20 @@ def markQuestion(match, index, pageText, last_match):
     return pageText[index:first_match].replace('.','')
         
 def phrasePdf(filePath):
-    '''Return format : [sub queation number + letter, queation text]'''
+    '''Return format : [sub question number + letter, question text]'''
     pdfText = []
+    #returns the number of pages in the pdf
     _, pages = openPdf(filePath, 0)
-
+    #returns the text from each page and append them to a list (one list one pdf)
     for i in range(pages):
         pageText, _ = openPdf(filePath, i)
         pdfText.append(pageText)
 
     substring = r'\([a-h]\)'
 
-    queations = []
-    currentQueationNum = 0
+    questions = []
+    #the first question name is 0
+    currentQuestionNum = 0
     for page in pdfText[1:]:
         last_match = 0
         found = False
@@ -46,12 +48,13 @@ def phrasePdf(filePath):
         # find queation based on sub queation, as it is easy to detect
         for match in re.finditer(substring, page):
             print(match.group())
+            #subquestion a marks that there is a main question
             if match.group()[1] == 'a':
-                currentQueationNum += 1
-            queationText = markQuestion(match, match.start(), page, last_match)
-            queations.append([str(currentQueationNum)+match.group()[1],queationText])
+                currentQuestionNum += 1
+            questionText = markQuestion(match, match.start(), page, last_match)
+            questions.append([str(currentQuestionNum)+match.group()[1],questionText])
             found = True
-        # if no sub queation found, check the page for marks given
+        # if no sub question found, check the page for marks given
         if found == False:
             pagetext = '\n'.join(page.split('\n')[2:])
             # print('No queation this page? Searching for marks given')
@@ -59,19 +62,19 @@ def phrasePdf(filePath):
             for match in re.finditer('\[\d+\]', pagetext):
                 foundIndex = match.start()
                 # if marks found, find a number before the marks given. This could be a queation number or 
-                # just a part of the queation
+                # just a part of the question
                 for match in re.finditer('\d+', pagetext[:foundIndex]):
                     startIndex = match.start()
                     # check if number found is on the 3rd line
                     # paper layout is 1st line page number 2nd line subject code
-                    # the 3rd line therefore countain the queation number if there is one
+                    # the 3rd line therefore countain the question number if there is one
                     if match.group() in page.split('\n')[2][:4]:
-                        currentQueationNum += 1
-                        queationText = pagetext[startIndex:foundIndex]
-                        queations.append([str(currentQueationNum)+'a',queationText])
+                        currentQuestionNum += 1
+                        questionText = pagetext[startIndex:foundIndex]
+                        questions.append([str(currentQuestionNum)+'a',questionText])
             
 
-    return queations
+    return questions
 
 if __name__ == '__main__':
     cwd = os.getcwd()

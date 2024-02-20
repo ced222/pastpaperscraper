@@ -20,10 +20,15 @@ def openFile():
             all_topic_texts.append([file_contents, "{}".format(str(i + 1))])
     return all_topic_texts
 
-def getKeywords(text, n=3):
-    kw_extractor = yake.KeywordExtractor(n=n)
+def getKeywords(text, n=1):
+    kw_extractor = yake.KeywordExtractor(n=2)
     keywords = kw_extractor.extract_keywords(text)
+    keywordsProcessed = []
+    for i,_ in keywords:
+        for v in i.split():
+            keywordsProcessed.append(())
 
+        
     return keywords
 
 def chapterKeywords():
@@ -40,6 +45,7 @@ def chapterKeywords():
     for text in chapterList:
         keywords = custom_kw_extractor.extract_keywords(' '.join(text))
         chapterKw.append(keywords)
+    #print(chapterKw)
     return chapterKw
 
 
