@@ -1,0 +1,72 @@
+CPU
+Architecture
+Von Neumann
+Von Neumann
+Von Neumann
+Von Neumann
+stored program concept
+Program Counter 
+Memory Data Register 
+Memory address Register
+the accumulator
+accumulator
+index Register
+current instruction Register
+status Register
+pc
+mdr
+mar
+acc
+ix
+cir
+register
+general purpose
+arithmetic unit
+logic unit
+alu
+cu
+ias
+immediate access store
+system clock
+processor type
+number of cores
+bus width
+clock speed
+cache memory
+universal serial bus
+usb
+high definition multimedia interface 
+hdmi
+vga
+video graphics array
+peripheral devices
+register transfer 
+notation
+F-E cycle
+fetch-execute cycle
+interrupt
+interrupt service handling routine
+ISR
+interrupt handling
+assembly Language
+assembly
+two-pass assembler
+compare instruction
+arithmetic operation
+data movement
+unconditional instruction
+conditional instruction
+immediate
+direct
+indirect
+indexed
+addressing
+logical shift
+artihmetic shift
+cyclic shift
+left shift
+right shift
+binary shift
+bit Manipulation
+bit masking
+bit masking

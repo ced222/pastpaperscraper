@@ -1,0 +1,45 @@
+security
+privacy
+data integrity
+security of data
+user accounts
+password
+authentication
+digital signature
+biometrics
+firewall
+anti-virus software
+anti-spyware
+encryption
+security measure
+threat
+threats
+data security
+malware
+virus
+spyware
+hackers
+phishing
+pharming
+risk
+access right
+data validation
+validation
+verification
+integrity of data
+range check
+format check
+length check
+presence check
+existence check
+limit check
+visual check
+double entry
+data transfer
+parity
+parity check
+parity bit
+parity byte
+checksum
+data entry
+data transfer

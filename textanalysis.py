@@ -1,5 +1,7 @@
 import yake
 import os, json
+'''INGNORE THIS FOR NOW'''
+
 #cleans the inputted textbook data - tbh i have no idea how the code works i copy pasted it
 # nlp = spacy.load("en_core_web_sm")
 cwd = os.getcwd()
@@ -21,7 +23,7 @@ def openFile():
     return all_topic_texts
 
 def getKeywords(text, n=1):
-    kw_extractor = yake.KeywordExtractor(n=2)
+    kw_extractor = yake.KeywordExtractor(n=1)
     keywords = kw_extractor.extract_keywords(text)
     keywordsProcessed = []
     for i,_ in keywords:
@@ -35,7 +37,7 @@ def chapterKeywords():
     language = "en"
     numOfKeywords = 200
 
-    custom_kw_extractor = yake.KeywordExtractor(lan=language,top=numOfKeywords,n=2,features=None)
+    custom_kw_extractor = yake.KeywordExtractor(lan=language,top=numOfKeywords,n=1,features=None)
 
     chapterList = openFile()
     # print(len(chapterList))

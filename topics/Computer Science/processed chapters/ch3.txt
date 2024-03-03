@@ -1,0 +1,51 @@
+input
+output
+input device
+output device
+primary memory
+secondary memory
+embedded systems
+laser printer
+3d printer
+microphone
+speaker
+magnetic hard disk
+solid static
+optical disc
+optical
+touchscreen
+virtual reality headset
+VR headset
+VR
+Random access memory
+ROM
+RAM
+Read Only Memory
+Static RAM
+SRAM
+Dynamic RAM
+DRAM
+Programmable ROM
+PROM
+Erasable Programmable ROM
+EPROM
+Electrically Erasable Programmable ROM
+EEPROM
+monitoring system
+monitor
+control
+control system
+monitor system
+sensor
+sensors
+temperature
+pressure
+infra-red 
+sound
+actuator
+feedback
+Gates
+Logic circuit
+Truth table
+Logic expression
+Problem statement

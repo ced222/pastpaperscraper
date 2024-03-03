@@ -1,0 +1,62 @@
+file-based
+database
+relational database
+entity
+table
+record
+field
+tuple
+attribute
+primary key
+candidate key
+secondary key
+foreign key
+relationship
+one-to-many
+one-to-one
+many-to-many
+referential integrity
+indexing
+entity-relationship
+e-R
+normalisation
+normalised
+first normal form
+1NF
+second normal form
+2NF
+third normal form
+3NF
+DBMS
+database management system
+data Management
+data dictionary
+data modelling
+logical schema
+data security
+query processor
+developer interface
+Data definition Language
+DBMS
+SQL
+structured query Language
+DML
+SQL
+SQL
+database
+table definition
+primary key
+foreign key
+REFERENCES
+SELECT
+from
+where
+order by
+group by
+inner JOIN
+SUM
+Counter
+AVG
+insert INTO
+delete from
+UPDATE

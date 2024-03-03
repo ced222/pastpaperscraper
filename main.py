@@ -28,6 +28,7 @@ for i,question in questions:
     current = []
     probs = []
     fkw = []
+    
     for kw,__ in keywords[:5]: #search through each keyword in the question
         for chapter in chapterKw: #search through each chapter
             

@@ -1,0 +1,57 @@
+kibi
+kilo
+mebi
+mega
+gibi
+giga
+tebi
+tera
+binary
+denary
+hexadecimal
+sound
+prefixes
+decimal
+BCD
+Binary Coded Decimal
+one's complement
+two's complement
+overflow
+hexadecimal
+ASCII
+Ameircan Standard Code
+Unicode
+bitmapped
+bitmap
+pixel
+file header
+image resolution
+screen resolution
+colour depth
+bit depth
+bitmap image
+file size
+drawing object 
+property
+drawing list
+vector graphic
+vector Graphics
+image quality
+sound
+encoded
+sampling rate
+sampling resolution
+analogue
+digital data
+file size
+resolution
+run-length encoding
+(RLE)
+lossy
+lossless
+lossy compression
+lossless compression
+text file
+sound file
+vector graphic
+vector

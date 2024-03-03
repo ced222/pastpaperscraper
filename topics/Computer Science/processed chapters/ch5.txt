@@ -1,0 +1,45 @@
+operating system
+management tasks
+utility software
+utility
+os
+memory Management
+file Management
+security Management
+hardware management
+peripheral process Management
+input process management
+output process management
+disk formatter
+virus checker
+defragmentation software
+disk contents analysis
+disk repair software
+file compression
+back-up software
+program libraries
+software under development
+dynamic link library
+dll 
+dll file
+library file
+assembler software
+compiler
+interpreter
+high-Level
+java
+IDE
+integrated development environment
+context-sensitive 
+context-sensitive prompt
+dynamic syntax checks
+presentation
+prettyprint
+expand code block
+collapse code block
+debugging
+single stepping
+breakpoints
+variable
+expression
+report window
