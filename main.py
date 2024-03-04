@@ -1,20 +1,22 @@
-import os
-from pdfreader import phrasePdf
-
-cwd = os.getcwd()
-
-#configuration for which paper to find
-paperVariant = 3
+#######################################
+# configuration for which paper to find
+syllabus = 9618
 paperSeries = 2022
 paperSeason = "Summer"
 paper = 1
+paperVariant = 3
+#######################################
 
-paperPath = cwd + "\\past papers\\9618\\{}\\{}.pdf".format((str(paperSeries)), ("9618_" + paperSeason[0].lower() + str(paperSeries)[2:] + "_" +"qp" + "_" + str(paper) + str(paperVariant)))
-questions = phrasePdf(paperPath)
-numberofChapters = 8
+
+import os
+from utils.pdfReader import phrasePdf
+from utils.externalSources import getPaper
+
+cwd = os.getcwd()
+
 def openFile(cwd, numberofChapters):
     all_topic_texts = {}
-    #reads each computer science text file which contains manually inputted keywords and phrases
+    # reads each computer science text file which contains manually inputted keywords and phrases
     for i in range(numberofChapters ):
         file_path = '\\topics\\Computer Science\\processed chapters\\ch{}.txt'.format(str(i + 1))
 
@@ -26,8 +28,7 @@ def openFile(cwd, numberofChapters):
             all_topic_texts["{}".format(str(i + 1))] =  file_contents
     # print(all_topic_texts)
     return all_topic_texts
-keywords = openFile(cwd,8) #returns all keywords in the text file
-print(keywords)
+
 
 def findMatch(keywords, question):
     listOfMatchesByChapter = {}
@@ -50,6 +51,19 @@ def findMatch(keywords, question):
         matches = 0 #reset matches
     
     return listOfMatchesByChapter
+
+
+
+paperPath = cwd + "\\past papers\\{}\\{}\\{}.pdf".format(syllabus,(str(paperSeries)), ("9618_" + paperSeason[0].lower() + str(paperSeries)[2:] + "_" +"qp" + "_" + str(paper) + str(paperVariant)))
+if not os.path.isfile(paperPath):
+    getPaper(syllabus, paperSeries, paperSeason.lower(), paper, paperVariant)
+
+questions = phrasePdf(paperPath)
+numberofChapters = 8
+
+
+keywords = openFile(cwd,8) #returns all keywords in the text file
+print(keywords)
 
 #main program
 # print(questions[0][1]) #format for questions is index 0 contains question number and index 1 contains question itself
