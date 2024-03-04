@@ -78,5 +78,5 @@ def phrasePdf(filePath):
 
 if __name__ == '__main__':
     cwd = os.getcwd()
-    filePath = cwd + '/past papers/computer Science - 9618/2023/9618_s23_qp_11.pdf'
+    filePath = cwd + '/past papers/9618/2023/9618_s23_qp_11.pdf'
     phrasePdf(filePath)

@@ -1,56 +1,66 @@
-from pdfreader import phrasePdf
-from textanalysis import chapterKeywords, getKeywords
 import os
+from pdfreader import phrasePdf
 
 cwd = os.getcwd()
-filePath = cwd + '/past papers/computer Science - 9618/2023/9618_s23_qp_11.pdf'
-questions = phrasePdf(filePath)
-chapterKw = chapterKeywords()
-blacklist = ['complete', 'definition', 'term', 'terms', 'defining', 'explain']
-for i,question in questions:
-    keywords = getKeywords(question)
-    keywords2 = []
-    for ii, ji in keywords:
-        skip = False
-        for ki in ii.lower().split(' '):
-            if ki in blacklist:
-                skip = True
-        if skip == False:
-            keywords2.append((ii,ji))
 
-    keywords = keywords2
-    
+#configuration for which paper to find
+paperVariant = 3
+paperSeries = 2022
+paperSeason = "Summer"
+paper = 1
 
-    if i == '1a':
-        print(keywords, "ch1 keywords")
-        print(keywords2, "question keywords")
+paperPath = cwd + "\\past papers\\9618\\{}\\{}.pdf".format((str(paperSeries)), ("9618_" + paperSeason[0].lower() + str(paperSeries)[2:] + "_" +"qp" + "_" + str(paper) + str(paperVariant)))
+questions = phrasePdf(paperPath)
+numberofChapters = 8
+def openFile(cwd, numberofChapters):
+    all_topic_texts = {}
+    #reads each computer science text file which contains manually inputted keywords and phrases
+    for i in range(numberofChapters ):
+        file_path = '\\topics\\Computer Science\\processed chapters\\ch{}.txt'.format(str(i + 1))
 
-    current = []
-    probs = []
-    fkw = []
-    
-    for kw,__ in keywords[:5]: #search through each keyword in the question
-        for chapter in chapterKw: #search through each chapter
+        file_path = cwd + file_path
+        # print(file_path)
+        with open(file_path, 'r', encoding='utf-8') as file:
+            file_contents = file.readlines()
+           
+            all_topic_texts["{}".format(str(i + 1))] =  file_contents
+    # print(all_topic_texts)
+    return all_topic_texts
+keywords = openFile(cwd,8) #returns all keywords in the text file
+print(keywords)
+
+def findMatch(keywords, question):
+    listOfMatchesByChapter = {}
+    matches = 0
+    question = question.lower()
+ 
+
+    for chapterIndex in range(len(keywords)):
+  
+        
+        for key_word in keywords[str(chapterIndex + 1)]: #search through each keyword and see whether it is a substring nside the question 
             
-            for ckw,_ in chapter: #search each keyword in each chapter
-                for kwi in kw.split(): 
-                    if kwi in ckw and len(ckw.split(' ')) != 1:
-                        matchFound = True #if there is a keyword match, its true, else false
-                        current.append(chapterKw.index(chapter))
-                        probs.append(__*_)
-                        fkw.append([kw,ckw])
-                        break
-    print(probs)
-    if matchFound:
-        pindex = probs.index(min(probs))
-    print(i, ': Chapter',current[pindex] + 1, end=' or ')
-    del probs[probs.index(min(probs))]
-    try:
-        while fkw[pindex][0] == fkw[probs.index(min(probs))][0] and len(probs) != 1:
-            del probs[probs.index(min(probs))]
-        print(current[probs.index(min(probs))] + 1, end=' ')
-        print(f'used keyword {fkw[pindex]} and {fkw[probs.index(min(probs))]}')
-    except:
-        print(f'used keyword {fkw[pindex]}')
+            key_word = key_word.replace("\n", "")
+            key_word = key_word.lower()
+            matches += question.count(key_word) #if match found, increment matches
+            
+            
+        listOfMatchesByChapter[str(chapterIndex+1)] = matches #add matches to dictionary
+        
+        matches = 0 #reset matches
     
-    # print(queation.replace('.','').replace('\n',' '))
+    return listOfMatchesByChapter
+
+#main program
+# print(questions[0][1]) #format for questions is index 0 contains question number and index 1 contains question itself
+
+for question in questions:
+    
+    listOfMatches = findMatch(keywords, question[1])
+        #finds question with highest count
+    for key, value in listOfMatches.items():
+        
+        if value == max(listOfMatches.values()):
+            max_key = key
+            break
+    print( "Question " + question[0] + " topic is: Chapter {}".format(max_key))
